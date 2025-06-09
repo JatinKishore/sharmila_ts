@@ -1,0 +1,524 @@
+<h1 class="text-center">Employee Basic Details</h1>
+
+<div class="col-md-6 container">
+
+  <form [formGroup]="parentForm" (ngSubmit)="formSubmit()" autocomplete="off">
+
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+      <mat-step [stepControl]="profileForm">
+        <ng-template matStepLabel>Employee Basic Details</ng-template>
+        <form [formGroup]="profileForm">
+
+          <label for="company">Company Name: </label>
+          <select class="form-control" id="company_id" formControlName="company_id" [ngClass]="{
+            'is-invalid':
+              (isSubmit && formControls['company_id'].errors) ||
+              (formControls['company_id'].invalid &&
+                (formControls['company_id'].dirty ||
+                  formControls['company_id'].touched)) 
+          }">
+            <option *ngFor="let company of companies" [value]="company.company_id">
+              {{ company.value }}
+            </option>
+          </select>
+
+          <div *ngIf="
+          (isSubmit && formControls['company_id']?.errors) ||
+          (formControls['company_id']?.invalid &&
+            (formControls['company_id']?.dirty ||
+              formControls['company_id']?.touched))
+        " class="invalid-feedback">
+            <span *ngIf="formControls['company_id'].errors?.['required']">Company is Required</span>
+          </div>
+
+          <br>
+
+          <label for="first-name">First Name: </label>
+
+          <input class="form-control" id="first-name" type="text" formControlName="firstName" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['firstName'].errors) ||
+                    (formControls['firstName'].invalid &&
+                      (formControls['firstName'].dirty ||
+                        formControls['firstName'].touched)) 
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['firstName']?.errors) ||
+                  (formControls['firstName']?.invalid &&
+                    (formControls['firstName']?.dirty ||
+                      formControls['firstName']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['firstName'].errors?.['required']">Name is Required</span>
+            <span *ngIf="formControls['firstName'].errors?.['minlength']">Minimum Length 3 Characters.</span>
+            <span *ngIf="formControls['firstName'].errors?.['pattern']">Enter Alphabit Only</span>
+          </div>
+          <br />
+          <label for="lastName">Last Name: </label>
+
+          <input class="form-control" id="lastName" type="text" formControlName="lastName" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['lastName'].errors) ||
+                    (formControls['lastName'].invalid &&
+                      (formControls['lastName'].dirty ||
+                        formControls['lastName'].touched))
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['lastName']?.errors) ||
+                  (formControls['lastName']?.invalid &&
+                    (formControls['lastName']?.dirty ||
+                      formControls['lastName']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['lastName'].errors?.['required']">Name is Required</span>
+            <span *ngIf="formControls['lastName'].errors?.['minlength']">Minimum Length 3 Characters.</span>
+            <span *ngIf="formControls['lastName'].errors?.['pattern']">Enter Alphabit Only</span>
+          </div>
+          <br />
+          <label for="emailId">E-mail ID: </label>
+
+
+          <input class="form-control" id="emailId" type="email" formControlName="emailId" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['emailId'].errors) ||
+                    (formControls['emailId'].invalid &&
+                      (formControls['emailId'].dirty ||
+                        formControls['emailId'].touched))
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['emailId']?.errors) ||
+                  (formControls['emailId']?.invalid &&
+                    (formControls['emailId']?.dirty ||
+                      formControls['emailId']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['emailId'].errors?.['required']">Email is Required</span>
+            <span *ngIf="formControls['emailId'].errors?.['minlength']">Give Valid Email Id</span>
+          </div>
+          <br />
+          <label for="mobileNumber">Mobile Number: </label>
+
+
+          <input class="form-control" id="mobileNumber" type="number" formControlName="mobileNumber" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['mobileNumber'].errors) ||
+                    (formControls['mobileNumber'].invalid &&
+                      (formControls['mobileNumber'].dirty ||
+                        formControls['mobileNumber'].touched))
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['mobileNumber']?.errors) ||
+                  (formControls['mobileNumber']?.invalid &&
+                    (formControls['mobileNumber']?.dirty ||
+                      formControls['mobileNumber']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['mobileNumber'].errors?.['required']">Mobile Number is Required</span>
+            <span *ngIf="formControls['mobileNumber'].errors?.['minlength']">Give Valid Mobile Number</span>
+          </div>
+          <br>
+          <label for="dateOfBirth">Date Of Birth: </label>
+
+          <input class="form-control" id="dateOfBirth" type="date" [min]="minDate" [max]="maxDate"
+            formControlName="dateOfBirth" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['dateOfBirth'].errors) ||
+                    (formControls['dateOfBirth'].invalid &&
+                      (formControls['dateOfBirth'].dirty ||
+                        formControls['dateOfBirth'].touched))
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['dateOfBirth']?.errors) ||
+                  (formControls['dateOfBirth']?.invalid &&
+                    (formControls['dateOfBirth']?.dirty ||
+                      formControls['dateOfBirth']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['dateOfBirth'].errors?.['required']">Date of Birth is Required</span>
+          </div>
+          <br>
+          <label for="dateOfJoin">Date Of Joining: </label>
+
+
+          <input class="form-control" id="dateOfJoin" type="date" [min]="minDateOfJoin" [max]="maxDateOfJoin"
+            formControlName="dateOfJoin" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['dateOfJoin'].errors) ||
+                    (formControls['dateOfJoin'].invalid &&
+                      (formControls['dateOfJoin'].dirty ||
+                        formControls['dateOfJoin'].touched))
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['dateOfJoin']?.errors) ||
+                  (formControls['dateOfJoin']?.invalid &&
+                    (formControls['dateOfJoin']?.dirty ||
+                      formControls['dateOfJoin']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['dateOfJoin'].errors?.['required']">Date of Joining is Required</span>
+          </div>
+          <br>
+          <label for="employeeCode">Employee Code: </label>
+
+
+          <input class="form-control" id="employeeCode" type="number" formControlName="employeeCode" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['employeeCode'].errors) ||
+                    (formControls['employeeCode'].invalid &&
+                      (formControls['employeeCode'].dirty ||
+                        formControls['employeeCode'].touched))
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['employeeCode']?.errors) ||
+                  (formControls['employeeCode']?.invalid &&
+                    (formControls['employeeCode']?.dirty ||
+                      formControls['employeeCode']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['employeeCode'].errors?.['required']">Employee code is Required</span>
+          </div>
+          <br>
+          <label for="panNumber">PAN Number: </label>
+
+
+          <input class="form-control" id="panNumber" type="text" formControlName="panNumber" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['panNumber'].errors) ||
+                    (formControls['panNumber'].invalid &&
+                      (formControls['panNumber'].dirty ||
+                        formControls['panNumber'].touched))
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['panNumber']?.errors) ||
+                  (formControls['panNumber']?.invalid &&
+                    (formControls['panNumber']?.dirty ||
+                      formControls['panNumber']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['panNumber'].errors?.['required']">PAN Number is Required</span>
+          </div>
+          <br>
+          <label for="bankName">Bank Name: </label>
+
+
+          <input class="form-control" id="bankName" type="text" formControlName="bankName" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['bankName'].errors) ||
+                    (formControls['bankName'].invalid &&
+                      (formControls['bankName'].dirty ||
+                        formControls['bankName'].touched))
+                }" />
+          <div *ngIf="
+                  (isSubmit && formControls['bankName']?.errors) ||
+                  (formControls['bankName']?.invalid &&
+                    (formControls['bankName']?.dirty ||
+                      formControls['bankName']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['bankName'].errors?.['required']">Bank Name is Required</span>
+          </div>
+          <br>
+          <label for="bankAccNum">Bank Account Number: </label>
+
+
+          <input class="form-control" id="bankAccNum" type="number" formControlName="bankAccNum" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['bankAccNum'].errors) ||
+                    (formControls['bankAccNum'].invalid &&
+                      (formControls['bankAccNum'].dirty ||
+                        formControls['bankAccNum'].touched))
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['bankAccNum']?.errors) ||
+                  (formControls['bankAccNum']?.invalid &&
+                    (formControls['bankAccNum']?.dirty ||
+                      formControls['bankAccNum']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['bankAccNum'].errors?.['required']">Bank Account Number is Required</span>
+          </div>
+          <br>
+          <label for="designation">Designation: </label>
+
+
+          <input class="form-control" id="designation" type="text" formControlName="designation" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['designation'].errors) ||
+                    (formControls['designation'].invalid &&
+                      (formControls['designation'].dirty ||
+                        formControls['designation'].touched))
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['designation']?.errors) ||
+                  (formControls['designation']?.invalid &&
+                    (formControls['designation']?.dirty ||
+                      formControls['designation']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['designation'].errors?.['required']">Designation is Required</span>
+          </div>
+          <br>
+
+          <label for="address">Address: </label>
+
+
+          <input class="form-control" id="address" type="text" formControlName="address" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['address'].errors) ||
+                    (formControls['address'].invalid &&
+                      (formControls['address'].dirty ||
+                        formControls['address'].touched))
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['address']?.errors) ||
+                  (formControls['address']?.invalid &&
+                    (formControls['address']?.dirty ||
+                      formControls['address']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['address'].errors?.['required']">Address is Required</span>
+          </div>
+          <br>
+          <label for="salary">Salary: </label>
+
+
+          <input class="form-control" id="salary" type="number" formControlName="salary" [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['salary'].errors) ||
+                    (formControls['salary'].invalid &&
+                      (formControls['salary'].dirty ||
+                        formControls['salary'].touched))
+                }" />
+
+          <div *ngIf="
+                  (isSubmit && formControls['salary']?.errors) ||
+                  (formControls['salary']?.invalid &&
+                    (formControls['salary']?.dirty ||
+                      formControls['salary']?.touched))
+                " class="invalid-feedback">
+            <span *ngIf="formControls['salary'].errors?.['required']">Salary is Required</span>
+          </div>
+          <br>
+          <!-- <br>
+                  <label for="hikeAmount">If Got Hike (optional): </label>
+
+                  <input class="form-control" id="hikeAmount" type="number" formControlName="hikeAmount" /> -->
+
+          <br>
+          <button mat-raised-button matStepperNext [disabled]="!profileForm.valid" color="primary">Next</button>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="salaryDetails">
+
+        <div class="container col-md-12">
+          <div *ngIf="errorMessage" class="error-message" [class.fade-out]="!isSubmit">
+            <mat-card style="background-color: #ee0000;" class="text-center">
+              <mat-card-content class="text-white">{{ errorMessage }}</mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        <!-- <div class="bg-danger text-center" style="padding:4px">{{salarymatched}}</div> -->
+        <ng-template matStepLabel>Salary Details</ng-template>
+        <form [formGroup]="salaryDetails">
+          <label for="basicSalary">Basic Salary: </label>
+
+          <input class="form-control" id="basicSalary" type="number" formControlName="basicSalary" [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && newFormControls['basicSalary'].errors) ||
+                      (newFormControls['basicSalary'].invalid &&
+                        (newFormControls['basicSalary'].dirty ||
+                          newFormControls['basicSalary'].touched))
+                  }" />
+
+          <div *ngIf="
+                    (isSubmit && newFormControls['basicSalary']?.errors) ||
+                    (newFormControls['basicSalary']?.invalid &&
+                      (newFormControls['basicSalary']?.dirty ||
+                        newFormControls['basicSalary']?.touched))
+                  " class="invalid-feedback">
+            <span *ngIf="newFormControls['basicSalary'].errors?.['required']">This Field is Required</span>
+          </div>
+          <br />
+
+          <label for="houseRentAllowance">House Rent Allowance: </label>
+
+          <input class="form-control" id="houseRentAllowance" type="number" formControlName="houseRentAllowance"
+            [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && newFormControls['houseRentAllowance'].errors) ||
+                      (newFormControls['houseRentAllowance'].invalid &&
+                        (newFormControls['houseRentAllowance'].dirty ||
+                          newFormControls['houseRentAllowance'].touched))
+                  }" />
+
+          <div *ngIf="
+                    (isSubmit && newFormControls['houseRentAllowance']?.errors) ||
+                    (newFormControls['houseRentAllowance']?.invalid &&
+                      (newFormControls['houseRentAllowance']?.dirty ||
+                        newFormControls['houseRentAllowance']?.touched))
+                  " class="invalid-feedback">
+            <span *ngIf="newFormControls['houseRentAllowance'].errors?.['required']">This Field is Required</span>
+          </div>
+          <br />
+          <label for="conveyance">conveyance: </label>
+
+          <input class="form-control" id="conveyance" type="number" formControlName="conveyance" [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && newFormControls['conveyance'].errors) ||
+                      (newFormControls['conveyance'].invalid &&
+                        (newFormControls['conveyance'].dirty ||
+                          newFormControls['conveyance'].touched))
+                  }" />
+
+          <div *ngIf="
+                    (isSubmit && newFormControls['conveyance']?.errors) ||
+                    (newFormControls['conveyance']?.invalid &&
+                      (newFormControls['conveyance']?.dirty ||
+                        newFormControls['conveyance']?.touched))
+                  " class="invalid-feedback">
+            <span *ngIf="newFormControls['conveyance'].errors?.['required']">This Field is Required</span>
+          </div>
+          <br />
+          <label for="childEduAllowance">Other Allowance: </label>
+
+          <input class="form-control" id="childEduAllowance" type="number" formControlName="childEduAllowance"
+            [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && newFormControls['childEduAllowance'].errors) ||
+                      (newFormControls['childEduAllowance'].invalid &&
+                        (newFormControls['childEduAllowance'].dirty ||
+                          newFormControls['childEduAllowance'].touched))
+                  }" />
+
+          <div *ngIf="
+                    (isSubmit && newFormControls['childEduAllowance']?.errors) ||
+                    (newFormControls['childEduAllowance']?.invalid &&
+                      (newFormControls['childEduAllowance']?.dirty ||
+                        newFormControls['childEduAllowance']?.touched))
+                  " class="invalid-feedback">
+            <span *ngIf="newFormControls['childEduAllowance'].errors?.['required']">This Field is Required</span>
+          </div>
+          <br />
+          <label for="mediAllowance">Medi Allowance: </label>
+
+          <input class="form-control" id="mediAllowance" type="number" formControlName="mediAllowance" [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && newFormControls['mediAllowance'].errors) ||
+                      (newFormControls['mediAllowance'].invalid &&
+                        (newFormControls['mediAllowance'].dirty ||
+                          newFormControls['mediAllowance'].touched))
+                  }" />
+
+          <div *ngIf="
+                    (isSubmit && newFormControls['mediAllowance'].errors) ||
+                    (newFormControls['mediAllowance'].invalid &&
+                      (newFormControls['mediAllowance'].dirty ||
+                        newFormControls['mediAllowance'].touched))
+                  " class="invalid-feedback">
+            <span *ngIf="newFormControls['mediAllowance'].errors?.['required']">This Field is Required</span>
+          </div>
+          <br />
+          <label for="specialAllowance">Special Allowance: </label>
+
+          <input class="form-control" id="specialAllowance" type="number" formControlName="specialAllowance" [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && newFormControls['specialAllowance'].errors) ||
+                      (newFormControls['specialAllowance'].invalid &&
+                        (newFormControls['specialAllowance'].dirty ||
+                          newFormControls['specialAllowance'].touched))
+                  }" />
+
+          <div *ngIf="
+                    (isSubmit && newFormControls['specialAllowance']?.errors) ||
+                    (newFormControls['specialAllowance']?.invalid &&
+                      (newFormControls['specialAllowance']?.dirty ||
+                        newFormControls['specialAllowance']?.touched))
+                  " class="invalid-feedback">
+            <span *ngIf="newFormControls['specialAllowance'].errors?.['required']">This Field is Required</span>
+          </div>
+          <br />
+
+          <label for="lta">LTA Allowance: </label>
+
+          <input class="form-control" id="lta" type="number" formControlName="lta" [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && newFormControls['lta'].errors) ||
+                      (newFormControls['lta'].invalid &&
+                        (newFormControls['lta'].dirty ||
+                          newFormControls['lta'].touched))
+                  }" />
+
+          <div *ngIf="
+                    (isSubmit && newFormControls['lta']?.errors) ||
+                    (newFormControls['lta']?.invalid &&
+                      (newFormControls['lta']?.dirty ||
+                        newFormControls['lta']?.touched))
+                  " class="invalid-feedback">
+            <span *ngIf="newFormControls['lta'].errors?.['required']">This Field is Required</span>
+          </div>
+          <br />
+
+
+          <label for="telephonereimburesement">Telephone Reimbursement: </label>
+
+          <input class="form-control" id="telephonereimburesement" type="number" formControlName="telephonereimburesement" [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && newFormControls['telephonereimburesement'].errors) ||
+                      (newFormControls['telephonereimburesement'].invalid &&
+                        (newFormControls['telephonereimburesement'].dirty ||
+                          newFormControls['telephonereimburesement'].touched))
+                  }" />
+
+          <div *ngIf="
+                    (isSubmit && newFormControls['telephonereimburesement']?.errors) ||
+                    (newFormControls['telephonereimburesement']?.invalid &&
+                      (newFormControls['telephonereimburesement']?.dirty ||
+                        newFormControls['telephonereimburesement']?.touched))
+                  " class="invalid-feedback">
+            <span *ngIf="newFormControls['telephonereimburesement'].errors?.['required']">This Field is Required</span>
+          </div>
+          <br />
+
+
+          <label for="fuelreimburesement">Fuel Reimbursement: </label>
+
+          <input class="form-control" id="fuelreimburesement" type="number" formControlName="fuelreimburesement" [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && newFormControls['fuelreimburesement'].errors) ||
+                      (newFormControls['fuelreimburesement'].invalid &&
+                        (newFormControls['fuelreimburesement'].dirty ||
+                          newFormControls['fuelreimburesement'].touched))
+                  }" />
+
+          <div *ngIf="
+                    (isSubmit && newFormControls['fuelreimburesement']?.errors) ||
+                    (newFormControls['fuelreimburesement']?.invalid &&
+                      (newFormControls['fuelreimburesement']?.dirty ||
+                        newFormControls['fuelreimburesement']?.touched))
+                  " class="invalid-feedback">
+            <span *ngIf="newFormControls['fuelreimburesement'].errors?.['required']">This Field is Required</span>
+          </div>
+          <br />
+
+
+        </form>
+        <span>
+          <button mat-button matStepperPrevious color="primary">Back</button>
+        </span> &nbsp;
+        <button mat-raised-button color="primary" type="submit" [disabled]="!parentForm.valid">
+          Submit
+        </button>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+
+  </form>
+
+</div>
+
+<!-- <div class="container text-center">
+  <button mat-raised-button color="primary" [routerLink]="['/post-result']">
+    Employee data
+  </button>
+</div> -->

@@ -1,0 +1,214 @@
+<div class="container">
+    
+        <h1 class="text-center">Payslip Generation</h1>
+        <br>
+        <button mat-raised-button color="primary" routerLink="/payslip-details" style="float: right;margin: 4px;">Payslip Details</button>
+</div>
+<br>
+<br>
+<br>
+<div class="container d-flex">
+  <div class="col-md-3"></div>
+  <div class="col-md-3"></div>
+  <div class="col-md-3"></div>
+  <div class="col-md-3">
+    <h5>Bulk Payslip Generate (Excel)</h5>
+    <input type="file" (change)="onExcelUpload($event)" accept=".xlsx, .xls" class="form-control mb-3" />
+  </div>
+</div>
+<div class="container col-md-6">
+    <div *ngIf="errorMessage" class="error-message" [class.fade-out]="!isSubmit">
+        <mat-card style="background-color: #ee0000;" class="text-center">
+            <mat-card-content class="text-white">{{ errorMessage }}</mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+
+    
+
+
+<div class="col-md-6 container">
+            <form [formGroup]="payslipForm" (ngSubmit)="formSubmit()" autocomplete="off">
+              
+                <label for="emp-id">Emp Id: </label>
+                
+
+              <select class="form-control" id="emp-id" formControlName="employeeCode" [ngClass]="{
+              'is-invalid':
+                (isSubmit && formControls['employeeCode'].errors) ||
+                (formControls['employeeCode'].invalid &&
+                  (formControls['employeeCode'].dirty ||
+                    formControls['employeeCode'].touched))
+              }">
+              
+              <option></option>
+                    
+              <option *ngFor="let payslipdata of payslipdatas?.data">{{payslipdata.employeeCode}} - {{payslipdata.firstName}} {{payslipdata.lastName}}</option>
+                </select>
+
+
+              <div *ngIf="
+              (isSubmit && formControls['employeeCode']?.errors) ||
+              (formControls['employeeCode']?.invalid &&
+                (formControls['employeeCode']?.dirty ||
+                  formControls['employeeCode']?.touched))
+            " class="invalid-feedback">
+                <span *ngIf="formControls['employeeCode'].errors?.['required']">This field is Required</span>
+              </div>
+              <br />
+             
+              <label for="salaryMonth">Select Month: </label>
+
+              <input class="form-control" id="salaryMonth" type="month"  [max]="maxDate" formControlName="salaryMonth" [ngClass]="{
+              'is-invalid':
+                (isSubmit && formControls['salaryMonth'].errors) ||
+                (formControls['salaryMonth'].invalid &&
+                  (formControls['salaryMonth'].dirty ||
+                    formControls['salaryMonth'].touched))
+            }" />
+
+              <div *ngIf="
+              (isSubmit && formControls['salaryMonth']?.errors) ||
+              (formControls['salaryMonth']?.invalid &&
+                (formControls['salaryMonth']?.dirty ||
+                  formControls['salaryMonth']?.touched))
+            " class="invalid-feedback">
+                <span *ngIf="formControls['salaryMonth'].errors?.['required']">This Field is Required</span>
+              </div>
+              <!-- <br />
+
+              <label for="totalWorkedDays">Total Worked Days </label>
+
+
+              <input class="form-control" id="totalWorkedDays" type="number" min="1" max="31" formControlName="totalWorkedDays" [ngClass]="{
+              'is-invalid':
+                (isSubmit && formControls['totalWorkedDays'].errors) ||
+                (formControls['totalWorkedDays'].invalid &&
+                  (formControls['totalWorkedDays'].dirty ||
+                    formControls['totalWorkedDays'].touched))
+            }" />
+
+              <div *ngIf="
+              (isSubmit && formControls['totalWorkedDays']?.errors) ||
+              (formControls['totalWorkedDays']?.invalid &&
+                (formControls['totalWorkedDays']?.dirty ||
+                  formControls['totalWorkedDays']?.touched))
+            " class="invalid-feedback">
+                <span *ngIf="formControls['totalWorkedDays'].errors?.['required']">Field is Required</span>
+                <span *ngIf="formControls['totalWorkedDays'].errors?.['minlength']">Give Valid Email Id</span>
+              </div> -->
+
+              <br>
+              
+              <label for="tds">TDS: (Optional)</label>
+
+
+              <input class="form-control" id="tds" type="number" formControlName="tds" [ngClass]="{
+              'is-invalid':
+                (isSubmit && formControls['tds'].errors) ||
+                (formControls['tds'].invalid &&
+                  (formControls['tds'].dirty ||
+                    formControls['tds'].touched))
+            }" />
+
+              <div *ngIf="
+              (isSubmit && formControls['tds']?.errors) ||
+              (formControls['tds']?.invalid &&
+                (formControls['tds']?.dirty ||
+                  formControls['tds']?.touched))
+            " class="invalid-feedback">
+                <span *ngIf="formControls['tds'].errors?.['required']">This Fied is Required</span>
+              </div>
+
+              <br>
+
+              <label for="loan">Loan: (Optional)</label>
+
+
+              <input class="form-control" id="loan" type="number" formControlName="loan" [ngClass]="{
+              'is-invalid':
+                (isSubmit && formControls['loan'].errors) ||
+                (formControls['loan'].invalid &&
+                  (formControls['loan'].dirty ||
+                    formControls['loan'].touched))
+            }" />
+
+              <div *ngIf="
+              (isSubmit && formControls['loan']?.errors) ||
+              (formControls['loan']?.invalid &&
+                (formControls['loan']?.dirty ||
+                  formControls['loan']?.touched))
+            " class="invalid-feedback">
+                <span *ngIf="formControls['loan'].errors?.['required']">This Fied is Required</span>
+              </div>
+
+              <br>
+
+              <label for="pf">Provident Fund:</label>
+
+
+              <input class="form-control" id="pf" type="number" formControlName="pf" [ngClass]="{
+              'is-invalid':
+                (isSubmit && formControls['pf'].errors) ||
+                (formControls['pf'].invalid &&
+                  (formControls['pf'].dirty ||
+                    formControls['pf'].touched))
+            }" />
+
+              <div *ngIf="
+              (isSubmit && formControls['pf']?.errors) ||
+              (formControls['pf']?.invalid &&
+                (formControls['pf']?.dirty ||
+                  formControls['pf']?.touched))
+            " class="invalid-feedback">
+                <span *ngIf="formControls['pf'].errors?.['required']">This Fied is Required</span>
+              </div>
+
+              <br>
+              
+              <label for="leaveDays">Paid Leave Days:</label>
+
+
+              <input class="form-control" id="leaveDays" type="number" min="0" max="31" formControlName="leaveDays" [ngClass]="{
+              'is-invalid':
+                (isSubmit && formControls['leaveDays'].errors) ||
+                (formControls['leaveDays'].invalid &&
+                  (formControls['leaveDays'].dirty ||
+                    formControls['leaveDays'].touched))
+            }" />
+
+              <div *ngIf="
+              (isSubmit && formControls['leaveDays']?.errors) ||
+              (formControls['leaveDays']?.invalid &&
+                (formControls['leaveDays']?.dirty ||
+                  formControls['leaveDays']?.touched))
+            " class="invalid-feedback">
+                <span *ngIf="formControls['leaveDays'].errors?.['required']">This Fied is Required</span>
+              </div>
+              <br>
+
+              <label for="lopDays">LOP Days: (Optional)</label>
+
+
+              <input class="form-control" id="lopDays" type="number" min="0" max="31" formControlName="lopDays" [ngClass]="{
+              'is-invalid':
+                (isSubmit && formControls['lopDays'].errors) ||
+                (formControls['lopDays'].invalid &&
+                  (formControls['lopDays'].dirty ||
+                    formControls['lopDays'].touched))
+            }" />
+
+              <div *ngIf="
+              (isSubmit && formControls['lopDays']?.errors) ||
+              (formControls['lopDays']?.invalid &&
+                (formControls['lopDays']?.dirty ||
+                  formControls['lopDays']?.touched))
+            " class="invalid-feedback">
+                <span *ngIf="formControls['lopDays'].errors?.['required']">This Fied is Required</span>
+              </div>
+              <br>
+
+              <button mat-raised-button type='submit' [disabled]="!payslipForm.valid" color="primary">generate payslip</button>
+            </form>
+</div>

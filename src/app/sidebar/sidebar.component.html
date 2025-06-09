@@ -1,0 +1,10 @@
+<mat-toolbar color="primary" class="sticky-navigation">
+    <span routerLink="/" style="cursor: pointer;">VPRC</span>
+    
+    <span class="spacer"></span>
+    <a mat-button routerLink="/" *ngIf="!hideElements">Home</a>
+    <a mat-button routerLink="/post-result" *ngIf="!hideElements">Employee Details</a>
+    <a mat-button routerLink="/payslip-details" *ngIf="!hideElements">Payslip Details</a>
+    <a mat-stroked-button (click)="logout()" *ngIf="!hideElements">Logout</a>
+  </mat-toolbar>
+  

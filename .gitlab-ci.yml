@@ -1,0 +1,19 @@
+stages:
+  - deploy
+
+prod_deploy:
+  stage: deploy
+  script:
+    - apt-get update -qq
+    - apt-get install -qq git
+    # Setup SSH deploy keys
+    - "which ssh-agent || ( apt-get install -qq openssh-client )"
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY_DEV")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ssh root@10.3.6.53 "cd /var/www/payroll/payroll-frontend && sudo git checkout dev && sudo git stash && sudo git pull origin dev"
+  only:
+    - dev
+  tags:
+    - vprc-server

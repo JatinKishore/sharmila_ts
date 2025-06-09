@@ -1,0 +1,11 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+
+  .sticky-navigation {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Adjust z-index as needed */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 25px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }

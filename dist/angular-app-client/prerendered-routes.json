@@ -1,0 +1,12 @@
+{
+  "routes": [
+    "/",
+    "/add-kitchen-items",
+    "/auth/login",
+    "/payslip",
+    "/payslip-details",
+    "/post-form",
+    "/post-kitchen-result",
+    "/post-result"
+  ]
+}

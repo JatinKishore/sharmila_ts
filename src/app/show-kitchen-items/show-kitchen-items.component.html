@@ -1,0 +1,43 @@
+<h1 class="text-center">View All Data</h1>
+
+<div class="container">
+  <button mat-button color="primary" (click)="addNewData()">Add New Data</button>
+</div>
+
+<div class="container">
+  
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col" class="col-md-8">Name</th>
+        <th scope="col" class="col-md-8">Weight (kg)</th>
+        <th class="col-md-2 text-center">Edit</th>
+        <th class="col-md-2 text-center">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.fruit_name }}</td>
+        <td>{{ item.fruit_weight }}</td>
+        <td class="text-center">
+          <button mat-button color="primary" (click)="edit(item)">Edit</button>
+        </td>
+        <td class="text-center">
+          <button
+            mat-fab
+            color="primary"
+            aria-label="Example icon button with a delete icon"
+           (click)="deleteData(item)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
