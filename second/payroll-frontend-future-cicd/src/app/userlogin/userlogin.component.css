@@ -1,0 +1,7 @@
+.container.d-flex {
+    min-height: 80vh; /* Set minimum height of the container to full viewport height */
+}
+
+.container.d-flex .row {
+    align-items: center; /* Align items in the center vertically */
+}

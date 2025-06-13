@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/purple-green.css';
+html, body { height: 100%; }
+body { margin: 0; font-family: "Poppins", sans-serif; }
+*{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: "Poppins", sans-serif !important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-toolbar.mat-primary{
+    background-color: #44c6e2 !important;
+}
+.mat-mdc-raised-button.mat-primary {
+    background-color: #44c6e2 !important;
+}
+.mat-mdc-unelevated-button.mat-primary, .mat-step-icon-selected, .mat-step-icon ,.mat-mdc-mini-fab.mat-primary   {
+    background-color: #44c6e2 !important;
+}

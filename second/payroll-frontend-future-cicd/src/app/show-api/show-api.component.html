@@ -1,0 +1,63 @@
+<h1 class="text-center">Employee Details</h1>
+
+<div class="container">
+  <button mat-flat-button color="primary" style="float: right;margin: 4px;" (click)="addNewData()">Add New Employee</button>
+</div>
+<br>
+<div class="container">
+  
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col" class="col-md-8 table-heading">Name</th>
+        <th scope="col" class="col-md-8 table-heading">E-mail ID</th>
+        <th scope="col" class="col-md-8 table-heading">Mobile.No</th>
+        <th scope="col" class="col-md-8 table-heading">DOB</th>
+        <th scope="col" class="col-md-8 table-heading">DOJ</th>
+        <th scope="col" class="col-md-8 table-heading">Emp.Code</th>
+        <th scope="col" class="col-md-8 table-heading">PAN Number</th>
+        <th scope="col" class="col-md-8 table-heading">Bank Name</th>
+        <th scope="col" class="col-md-8 table-heading">Bank Acc.No</th>
+        <th scope="col" class="col-md-8 table-heading">Designation</th>
+        <th scope="col" class="col-md-8 table-heading">Salary</th>
+        <!-- <th scope="col" class="col-md-8">Hike</th> -->
+        <th class="col-md-2 text-center table-heading">Edit</th>
+        <th class="col-md-2 text-center table-heading">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of posts?.data">
+        
+        <td>{{ item.firstName }} {{ item.lastName }}</td>
+        <td>{{ item.emailId }}</td>
+        <td>{{ item.mobileNumber }}</td>
+        <td>{{ item.dateOfBirth | date }}</td>
+        <td>{{ item.dateOfJoin | date }}</td>
+        <td>{{ item.employeeCode }}</td>
+        <td>{{ item.panNumber }}</td>
+        <td>{{ item.bankName }}</td>
+        <td>{{ item.bankAccNum }}</td>
+        <td>{{ item.designation }}</td>
+        <td>{{ item.salary }}</td>
+        <!-- <td>{{ item.hikeAmount }}</td> -->
+        <td class="text-center">
+          <button mat-button color="primary" (click)="edit(item)">Edit</button>
+        </td>
+        <td class="text-center">
+            <button
+                mat-mini-fab
+                style="background-color: rgba(249, 59, 59, 0.938); color: #fff;"
+                aria-label="Example icon button with a delete icon"
+                (click)="openDialog(item)">
+                  <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+
+
+

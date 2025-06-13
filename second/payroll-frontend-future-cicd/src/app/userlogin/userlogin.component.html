@@ -1,0 +1,70 @@
+
+
+<div class="container d-flex">
+    <div class="row">
+        <div class="col-md-4">
+            <div *ngIf="errorMessage" class="error-message" [class.fade-out]="!isSubmit">
+                <mat-card style="background-color: #ee0000;" class="text-center">
+                    <mat-card-content class="text-white">{{ errorMessage }}</mat-card-content>
+                </mat-card>
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="formSubmit()" autocomplete="off">
+                    <label for="username">User Name: </label>
+                
+                    <input class="form-control" id="userName" type="text" formControlName="userName" [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && formControls['userName'].errors) ||
+                      (formControls['userName'].invalid &&
+                        (formControls['userName'].dirty ||
+                          formControls['userName'].touched))
+                  }" />
+    
+                    <div *ngIf="
+                    (isSubmit && formControls['userName']?.errors) ||
+                    (formControls['userName']?.invalid &&
+                      (formControls['userName'].dirty ||
+                        formControls['userName'].touched))
+                  " class="invalid-feedback">
+                      <span *ngIf="formControls['userName'].errors?.['required']">This Field is Required</span>
+                    </div>
+                    <br />
+                    <label for="password">Password: </label>
+                <div class="input-group">
+                  <input class="form-control" id="password" type="{{ showPassword ? 'text' : 'password' }}" #passwordField formControlName="password" [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && formControls['password'].errors) ||
+                      (formControls['password'].invalid &&
+                        (formControls['password'].dirty ||
+                          formControls['password'].touched))
+                  }" />
+                  <div class="input-group-append">
+                    <span class="show-password-btn input-group-text" style="padding: 10px;border-radius: 0px 5px 5px 0px;" (click)="togglePasswordVisibility()">
+                      <i class="fas fa-eye" *ngIf="showPassword"></i>
+                      <i class="fas fa-eye-slash" *ngIf="!showPassword"></i>
+                    </span>
+                    </div>
+                </div>
+                
+                  <br>
+                
+                    <div *ngIf="
+                    (isSubmit && formControls['password']?.errors) ||
+                    (formControls['password']?.invalid &&
+                      (formControls['password'].dirty ||
+                        formControls['password'].touched))
+                  " class="invalid-feedback">
+                      <span *ngIf="formControls['password'].errors?.['required']">This Field is Required</span>
+                    </div>
+                    <br />
+                    <button mat-raised-button color="primary"
+                        type="submit" [disabled]="!loginForm.valid">
+                        Submit
+                    </button>
+                </form>
+        </div>
+        <div class="col-md-8">
+            <img src="../../assets/undraw_secure_login_pdn4.svg" alt="" srcset="" class="img-fluid">
+        </div>
+    </div>
+    
+</div>

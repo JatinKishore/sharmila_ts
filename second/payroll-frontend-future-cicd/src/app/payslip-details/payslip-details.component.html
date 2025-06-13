@@ -1,0 +1,127 @@
+<h1 class="text-center">Payslip Details</h1>
+
+<div class="container">
+    <button mat-raised-button color="primary" routerLink="/payslip" >Create Payslip</button>
+</div>
+  
+<br>
+<div class="container">
+  <div class="row">
+
+  
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 mb-5">
+                <label for="filterMonth">Filter by Month:</label>
+                <input type="month" class="form-control" [min]="minDate" [max]="maxDate" id="filterMonth" [(ngModel)]="filterMonth" (input)="applyFilter()" />
+                
+            </div>
+            <div class="col-md-4 mb-5 mt-auto">
+                <button mat-flat-button color="primary" (click)="clearFilter()">Clear Filter</button>
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" class="col-md-3 table-heading">Employee Code</th>
+            <th scope="col" class="col-md-3 table-heading">Salary Month</th>
+            <th scope="col" class="col-md-3 table-heading">Paid Leave Days</th>
+            <th scope="col" class="col-md-3 table-heading">Lop Days</th>
+            <th scope="col" class="col-md-3 table-heading">Loan</th>
+            <!-- <th scope="col" class="col-md-3 table-heading">Total Worked Days</th> -->
+           
+            <th class="col-md-2 text-center table-heading">Delete</th>
+            <th class="col-md-2 text-center table-heading">Download Payslip</th>
+          </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="!filter">
+                
+                    <ng-container *ngFor="let item of posts?.data | reverse">
+                        <ng-container *ngFor="let user of payslipusername?.data | reverse">
+                            <ng-container>
+                                <tr *ngIf="item.employeeCode === user.employeeCode">
+                                    <td><span class="text-primary">{{ item.employeeCode }}</span> - {{ user.firstName }} {{ user.lastName }}</td>
+                                    <td >{{ item.salaryMonth | date: 'MMM yyyy' }}</td>
+                                    <td>{{ item.leaveDays }}</td>
+                                    <td>{{ item.lopDays }}</td>
+                                    <td>{{ item.loan }}</td>
+                                    <!-- <td>{{ item.totalWorkedDays }}</td> -->
+                                    <td class="text-center">
+                                    
+                                    <button
+                                        mat-mini-fab
+                                        style="background-color: rgba(249, 59, 59, 0.938); color: #fff;"
+                                        aria-label="Example icon button with a delete icon"
+                                        (click)="openDialog(item)"
+                                        
+                                    >
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    </td>
+                                    <td class="text-center">
+                                    <button
+                                        mat-mini-fab
+                                        color="primary"
+                                        aria-label="Example icon button with a delete icon"
+                                        (click)="generatePayslip(item)"
+                                    >
+                                        <mat-icon>picture_as_pdf</mat-icon>
+                                    </button>
+                                    </td>
+                                </tr>
+                        </ng-container>
+                        </ng-container>
+                        <!-- <app-pdf-generate [payslips]="item" [user]="getUserForPayslip(item)"></app-pdf-generate> -->
+
+                    </ng-container>
+                
+            </ng-container>
+
+                <!-- filtered data table -->
+            <ng-container *ngIf="filter">
+                
+                <ng-container *ngFor="let item of filteredData | reverse">
+                    <ng-container *ngFor="let user of payslipusername?.data | reverse">
+                    <tr *ngIf="item.employeeCode === user.employeeCode">
+                    <td><span class="text-primary">{{ item.employeeCode }}</span> - {{ user.firstName }} {{ user.lastName }}</td>
+                    <td>{{ item.salaryMonth | date: 'MMM yyyy' }}</td>
+                    <td>{{ item.leaveDays }}</td>
+                    <td>{{ item.lopDays }}</td>
+                    <td>{{ item.loan }}</td>
+                    <!-- <td>{{ item.totalWorkedDays }}</td> -->
+                    <td class="text-center">
+                        <button mat-mini-fab style="background-color: rgba(249, 59, 59, 0.938); color: #fff;" aria-label="Delete" (click)="openDialog(item)">
+                        <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <button mat-mini-fab color="primary" aria-label="Generate Payslip" (click)="generatePayslip(item)">
+                        <mat-icon>picture_as_pdf</mat-icon>
+                        </button>
+                    </td>
+                    </tr>
+                </ng-container>
+                </ng-container>
+
+            </ng-container>
+
+            
+              
+        </tbody>
+       
+      </table>
+
+      
+  </div>
+    
+  </div>
+<!-- <div class="container">
+    <button mat-flat-button color="primary" style="left: 30px;" (click)="list()">0</button>
+    <button mat-flat-button color="primary" style="left: 30px;" (click)="getDataByPage({ pageSize: 10, offset:10 })">1</button>
+</div> -->
+ 

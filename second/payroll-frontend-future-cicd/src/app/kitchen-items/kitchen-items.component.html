@@ -1,0 +1,61 @@
+<h1 class="text-center">Add Kitchen Items</h1>
+<div class="col-md-6 container">
+  <form [formGroup]="addKitchenItems" (ngSubmit)="formSubmit()" autocomplete="off">
+    <label for="fruits">Fruits</label>
+    <select
+      class="form-select form-control"
+      id="fruits"
+      type="select"
+      formControlName="fruits"
+    >
+      <option value="dry fruits">Dry Fruits</option>
+      <option value="fresh fruits">Fresh Fruits</option>
+    </select>
+
+    <br />
+    <div *ngIf="!id">
+      <button mat-raised-button color="primary" type="button" (click)="addNewItem()" >
+        Add Fruits
+      </button>
+    </div>
+    <br />
+    <div formArrayName="newItems">
+        <div *ngFor="let t of newItems.controls; let index = index">
+          <div [formGroupName]="index">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <h6>Pattern {{ index }}</h6>
+                <label for="{{ 'fruitName' + index }}">Fruit Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="{{ 'fruitName' + index }}"
+                  formControlName="fruitName"
+                />
+                <br />
+                <label for="{{ 'fruitWeight' + index }}">Fruit Weight (kg)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="{{ 'fruitWeight' + index }}"
+                  formControlName="fruitWeight"
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <br />
+    
+    <br />
+    <div class="container text-center">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!addKitchenItems.valid">Submit</button>
+    </div>
+  </form>
+</div>
+
+<div class="container mt-5">
+  <div class="text-center">
+    <button mat-button color="primary" type="button" (click)="viewAllData()" [disabled]="!addKitchenItems.valid">View All Data</button>
+  </div>
+</div>

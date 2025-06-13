@@ -1,0 +1,11 @@
+<div mat-dialog-title class="text-center text-primary" style="background-color: #fff;margin-bottom: 0;">Are You Sure!</div>
+<div mat-dialog-content style="background-color: #fff; color: #000;">
+  <!-- Your dialog content goes here -->
+  <p class="text-center" style="background-color: #fff; color: #000;">To Delete This Payslip Record</p> <!-- Example: Accessing data passed to the dialog -->
+</div>
+
+<div mat-dialog-actions style="justify-content: center;background-color: #fff;">
+    <button *ngIf="showPayslipDeleteButton" mat-stroked-button color="warn" [mat-dialog-close]="true" (click) ="delete(dialogData.id)">Delete</button>
+    <button *ngIf="showDataDeleteButton" mat-stroked-button color="warn" [mat-dialog-close]="true" (click) ="deleteData(dialogData.id)">Delete</button>
+    <button mat-stroked-button color="primary" [mat-dialog-close]="true">Close</button>
+</div>
